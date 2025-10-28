@@ -32,7 +32,7 @@ bashsudo /opt/splunk/bin/splunk add monitor /var/log/auth.log \
   -index linux_security \
   -sourcetype linux_secure
 
-### 2. SPL Query (Search Processing Language)
+2. SPL Query (Search Processing Language)
 
 splindex=linux_security sourcetype=linux_secure "Failed password"
 | rex field=_raw "from (?<src_ip>\d+\.\d+\.\d+\.\d+) port"
@@ -49,12 +49,16 @@ splindex=linux_security sourcetype=linux_secure "Failed password"
 All SPL commands were manually typed in the Splunk search bar.
 
 
-### 3. Scheduled Alert
+3. Scheduled Alert
 
 Name: Brute Force - multiple failed SSH logins
+--
 App: search
+--
 Schedule: */5 * * * * (every 5 minutes)
+--
 Trigger Condition: Number of Results > 0
+--
 Action: Run a script
 
 Script Call:
@@ -65,7 +69,7 @@ Path: /opt/splunk/bin/scripts/alert_log_incident.py
 Permissions: splunk:splunk, 755
 
 
-### 4. Incident Log Output
+4. Incident Log Output
 
 bash2025-10-28 19:29:03 | ALERT | IP: 192.168.50.40 | Pokusaja: 7 | SSH Brute Force
 
@@ -74,20 +78,23 @@ Owner: splunk:splunk
 Permissions: 664
 
 
-### 5. Attack Simulation (Hydra on Kali)
+5. Attack Simulation (Hydra on Kali)
 
 bashhydra -l testuser -P ~/passlist.txt 192.168.50.20 ssh -t 4 -V
 
 Generated 7+ failed login attempts → detected and logged by Splunk.
 
 
-### 6. Conclusion
+6. Conclusion
 
 This alerting lab successfully demonstrates:
 
 Automated detection of SSH brute force attempts
+
 Scheduled alert with real-time response
+
 Custom Python script for persistent incident logging
+
 Full integration with Splunk’s alerting engine
 
 All components manually configured and tested.
