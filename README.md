@@ -58,7 +58,7 @@ Trigger Condition: Number of Results > 0
 Action: Run a script
 
 Script Call:
-textalert_log_incident.py $result.src_ip$ $result.attempts$
+alert_log_incident.py $result.src_ip$ $result.attempts$
 
 Script: alert_log_incident.py (attached in repository)
 Path: /opt/splunk/bin/scripts/alert_log_incident.py
