@@ -89,13 +89,10 @@ Generated 7+ failed login attempts → detected and logged by Splunk.
 
 This alerting lab successfully demonstrates:
 
-Automated detection of SSH brute force attempts
-
-Scheduled alert with real-time response
-
-Custom Python script for persistent incident logging
-
-Full integration with Splunk’s alerting engine
+- Automated detection of SSH brute force attempts
+- Scheduled alert with real-time response
+- Custom Python script for persistent incident logging
+- Full integration with Splunk’s alerting engine
 
 All components manually configured and tested.
 No copy/paste used in production setup.
