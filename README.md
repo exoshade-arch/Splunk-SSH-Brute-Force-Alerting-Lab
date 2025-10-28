@@ -34,16 +34,12 @@ bashsudo /opt/splunk/bin/splunk add monitor /var/log/auth.log \
 
 2. SPL Query (Search Processing Language)
 
-splindex=linux_security sourcetype=linux_secure "Failed password"
-| rex field=_raw "from (?<src_ip>\d+\.\d+\.\d+\.\d+) port"
+index=linux_security sourcetype=linux_secure "Failed password"
+| rex "from (?<src_ip>\d+\.\d+\.\d+\.\d+)"
 | stats count as attempts by src_ip
-| where attempts >= 5
+| where attempts >=5
 | iplocation src_ip
-| eval severity = case(
-    attempts >= 20, "HIGH",
-    attempts >= 10, "MEDIUM",
-    attempts >= 5,  "LOW"
-)
+| eval severity=case(attempts>=20,"high", attempts>=10,"medium", attempts>=5,"low")
 | table src_ip attempts Country Region City severity
 
 All SPL commands were manually typed in the Splunk search bar.
