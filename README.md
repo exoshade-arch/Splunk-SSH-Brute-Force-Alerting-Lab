@@ -67,7 +67,7 @@ Permissions: splunk:splunk, 755
 
 4. Incident Log Output
 
-bash2025-10-28 19:29:03 | ALERT | IP: 192.168.50.40 | Pokusaja: 7 | SSH Brute Force
+bash2025-10-28 19:29:03 | ALERT | IP: 192.168.50.40 | Attempts: 7 | SSH Brute Force
 
 File: /var/log/splunk/alerts.log
 Owner: splunk:splunk
